@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -17,22 +19,37 @@ public class Entrega {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String fechaEntrega;
-    private String horaEntrega;
+    @Column(nullable = false)
+    private String horaInicio;
+    @Column(nullable = false)
+    private String horaFin;
+
+    @Column(nullable = false)
+    private LocalDate fechaEntrega;
+    @Column(nullable = false)
+    private LocalTime horaEntrega;
+    @Column(nullable = false)
     private String receptorNombre;
+    @Column(nullable = false)
     private String firmaDigital;
 
-    @OneToMany(mappedBy = "entrega")
-    private List<Paquete> paquete;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EstadoEntrega estadoEntrega;
 
-    @OneToMany(mappedBy = "entrega")
-    private List<Incidencia> incidencia;
+    @ManyToOne
+    @JoinColumn(name = "repartidor_id")
+    private Repartidor repartidor;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
-    @ManyToOne
-    @JoinColumn(name = "repartidor_id")
-    private Repartidor repartidor;
+    @ManyToMany
+    @JoinTable(
+            name = "entrega_paquete",
+            joinColumns = @JoinColumn(name = "entrega_id"),
+            inverseJoinColumns = @JoinColumn(name = "paquete_id")
+    )
+    private List<Paquete> paquetes;
 }

@@ -17,19 +17,20 @@ public class Repartidor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String apellidos;
+    @Column(nullable = false, unique = true)
     private String dni;
+    @Column(nullable = false)
     private String telefono;
+    @Column(nullable = true)
     private String zonaAsignada;
 
     @OneToMany(mappedBy = "repartidor")
-    private List<Entrega> entrega;
+    private List<Vehiculo> vehiculos;
 
-    @ManyToMany(mappedBy = "repartidor")
-    private List<Vehiculo> vehiculo;
-
-    @ManyToOne
-    @JoinColumn(name = "distribuidora_id")
-    private Distribuidora distribuidora;
+    @OneToMany(mappedBy = "repartidor")
+    private List<Entrega> entregas;
 }

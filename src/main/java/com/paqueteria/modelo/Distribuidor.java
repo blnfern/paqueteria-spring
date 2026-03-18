@@ -8,30 +8,25 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
-@Table(name = "rutas")
+@Table(name = "distribuidores")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Ruta {
+public class Distribuidor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String origen;
+    private String nombre;
     @Column(nullable = false)
-    private String destino;
+    private String direccion;
     @Column(nullable = false)
-    private Double distanciaKM;
+    private String telefono;
     @Column(nullable = false)
-    private Integer tiempoEstimadoMin;
+    private String ciudad;
 
-    @ManyToOne
-    @JoinColumn(name = "distribuidor_id")
-    private Distribuidor distribuidor;
-
-    @ManyToOne
-    @JoinColumn(name = "vehiculo_id")
-    private Vehiculo vehiculo;
+    @OneToMany(mappedBy = "distribuidor")
+    private List<Ruta> rutas;
 }

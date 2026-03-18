@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Table(name = "paquetes")
 @Data
@@ -15,21 +17,15 @@ public class Paquete {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String codigoSeguimiento;
+    @Column(nullable = false)
     private String descripcion;
+    @Column(nullable = false)
     private Double peso;
+    @Column(nullable = false)
     private String dimensiones;
-    private String estado;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
-
-    @ManyToOne
-    @JoinColumn(name = "distribuidora_id")
-    private Distribuidora distribuidora;
-
-    @ManyToOne
-    @JoinColumn(name = "repartidor_id")
-    private Repartidor repartidor;
+    @ManyToMany(mappedBy = "paquetes")
+    private List<Entrega> entregas;
 }
