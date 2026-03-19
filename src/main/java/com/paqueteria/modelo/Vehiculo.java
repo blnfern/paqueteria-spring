@@ -36,8 +36,6 @@ public class Vehiculo {
     @Column(nullable = false)
     private EstadoEntrega estadoVehiculo;
 
-    //Falta el ManyToMany del repartidor?
-
     @OneToMany(mappedBy = "vehiculo")
     private List<Vehiculo> vehiculos;
 

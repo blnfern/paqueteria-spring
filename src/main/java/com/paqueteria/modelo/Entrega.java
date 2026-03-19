@@ -20,11 +20,6 @@ public class Entrega {
     private Long id;
 
     @Column(nullable = false)
-    private String horaInicio;
-    @Column(nullable = false)
-    private String horaFin;
-
-    @Column(nullable = false)
     private LocalDate fechaEntrega;
     @Column(nullable = false)
     private LocalTime horaEntrega;

@@ -24,7 +24,11 @@ public class Paquete {
     @Column(nullable = false)
     private Double peso;
     @Column(nullable = false)
-    private String dimensiones;
+    private Double largo;
+    @Column(nullable = false)
+    private Double ancho;
+    @Column(nullable = false)
+    private Double alto;
 
     @ManyToMany(mappedBy = "paquetes")
     private List<Entrega> entregas;

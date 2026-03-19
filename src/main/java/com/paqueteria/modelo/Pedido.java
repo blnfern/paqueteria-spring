@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "pedidos")
@@ -19,7 +19,7 @@ public class Pedido {
     private Long id;
 
     @Column(nullable = false)
-    private OffsetDateTime fechaPedido;
+    private LocalDate fechaPedido;
     @Column(nullable = false)
     private Double total;
     @Enumerated(EnumType.STRING)
